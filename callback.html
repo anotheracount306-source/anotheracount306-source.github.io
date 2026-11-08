@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Conectando TikTok</title><link rel="stylesheet" href="../estilo.css"></head>
+<body><main>
+<p class="kicker">Estudio Creador Hub</p>
+<h1>Conectando con el hub…</h1>
+<p>TikTok te regresó aquí. Esta página solo pasa la respuesta al hub que corre en tu laptop (<code>localhost:8000</code>); no guarda nada.</p>
+<p class="nota">Si no avanza sola, abre esta página en la misma laptop donde corre el hub (con Docker prendido) y toca <a id="ir" href="#">continuar</a>.</p>
+<script>
+// Pasa ?code=...&state=... tal cual al callback local del hub. El canje del
+// código lo hace el hub con su client_secret; esta página nunca lo ve.
+(function () {
+  var q = location.search || "";
+  var u = "http://localhost:8000/api/v1/oauth/tiktok/callback" + q;
+  document.getElementById("ir").href = u;
+  if (q.indexOf("code=") > -1 || q.indexOf("error=") > -1) location.replace(u);
+})();
+</script>
+</main></body>
+</html>
